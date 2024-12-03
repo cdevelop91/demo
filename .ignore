@@ -1,0 +1,9 @@
+# Ignorar todo por defecto
+*
+
+# Excluir la carpeta src
+!src/
+
+# Ignorar los archivos dentro de src si es necesario (opcional)
+src/*~
+src/*.log
