@@ -1,0 +1,11 @@
+*.class
+*.jsdtscope
+*.project
+*.classpath
+*.component
+*.xml
+*.container
+*.name
+.settings/org.eclipse.jdt.core.prefs
+/build/
+/target/

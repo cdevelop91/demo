@@ -1,17 +1,17 @@
 package demo.controller;
 
 
+
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import demo.service.UsuarioService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import demo.service.UsuarioService;
 
 
 @WebServlet({"/guardarUsuario","/listarUsuario"})
@@ -30,14 +30,19 @@ public class UsuarioController extends HttpServlet {
 
             request.setAttribute("mensaje", "¡Usuario guardado exitosamente!");
             request.setAttribute("tipoMensaje", "exito");
+            
+            // Redirige a la lista de usuarios después de guardar
+            response.sendRedirect("listarUsuario");
+            
         } catch (Exception e) {
             e.printStackTrace();
 
             request.setAttribute("mensaje", "Ocurrió un error al guardar el usuario.");
             request.setAttribute("tipoMensaje", "error");
+            request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
         }
 
-        request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+       
     }
     
     @Override
@@ -56,7 +61,7 @@ public class UsuarioController extends HttpServlet {
                 request.setAttribute("tipoMensaje", "error");
             }
            
-            request.getRequestDispatcher("/WEB-INF/views/index").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
             
        
        

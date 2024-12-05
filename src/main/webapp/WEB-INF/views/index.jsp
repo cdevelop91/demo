@@ -1,6 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
+
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,17 +27,6 @@
         
         <button type="submit">Guardar</button>
     </form>
-
-    <!-- Mostrar mensaje de éxito o error -->
-    <c:if test="${not empty mensaje}">
-        <p style="color: ${tipoMensaje == 'exito' ? 'green' : 'red'};">
-            ${mensaje}
-        </p>
-    </c:if>
-    
-    
-
-    
     
     
     <%-- Mostrar mensaje de éxito/error --%>
