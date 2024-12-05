@@ -3,6 +3,8 @@
 *.project
 *.classpath
 *.component
+*.xml
+!pom.xml
 *.container
 *.name
 .settings/org.eclipse.jdt.core.prefs
