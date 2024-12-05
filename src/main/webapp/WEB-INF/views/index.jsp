@@ -39,14 +39,24 @@
 <%-- Mostrar lista de usuarios --%>
 <c:if test="${not empty usuarios}">
     <h2>Lista de Usuarios</h2>
-    <ul>
-        <c:forEach var="usuario" items="${usuarios}">
-            <li>${usuario}</li>
-        </c:forEach>
-        
-        
-        
-    </ul>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="usuario" items="${usuarios}">
+                <tr>
+                    <td>${usuario.nombre}</td>
+                    <td>${usuario.paterno}</td>
+                    <td>${usuario.materno}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
 </c:if>
     
     

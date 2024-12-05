@@ -6,6 +6,7 @@ package demo.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import demo.model.Usuario;
 import demo.service.UsuarioService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -52,7 +53,7 @@ public class UsuarioController extends HttpServlet {
        
        
             try {
-                ArrayList<String> usuarios = usuarioService.listarUsuarios();
+            	ArrayList<Usuario> usuarios = usuarioService.listarUsuarios();
 
                 request.setAttribute("usuarios", usuarios);
             } catch (Exception e) {

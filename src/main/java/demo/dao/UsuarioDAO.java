@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import demo.config.ConexionBD;
+import demo.model.Usuario;
 
 public class UsuarioDAO {
 	
@@ -28,23 +29,29 @@ public class UsuarioDAO {
         }
     }
     
-    public ArrayList<String> listarUsuarios(){
-    	String sql = "SELECT nombre FROM usuarios;";
-    	ArrayList<String> results = new ArrayList<>();
-    	
-    	   try (Connection con = ConexionBD.getConnection();
-    	        PreparedStatement ps = con.prepareStatement(sql);
-    			ResultSet rs = ps.executeQuery()) {
+    public ArrayList<Usuario> listarUsuarios() {
+        String sql = "SELECT * FROM usuarios;"; 
+        ArrayList<Usuario> results = new ArrayList<>();
 
-    		   while (rs.next()) {
-    			   results.add(rs.getString("nombre"));
-               }
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
+        try (Connection con = ConexionBD.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
-           return results;
-       }
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+            
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setPaterno(rs.getString("paterno"));
+                usuario.setMaterno(rs.getString("materno"));
+ 
+                results.add(usuario);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return results;
+    }
     
     
 }
