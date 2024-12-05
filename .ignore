@@ -3,6 +3,7 @@
 
 # Excluir la carpeta src
 !src/
+!.xml
 
 # Ignorar los archivos dentro de src si es necesario (opcional)
 src/*~
