@@ -3,15 +3,12 @@ package demo.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-
 import demo.dao.UsuarioDAO;
 import demo.model.Usuario;
 
 public class UsuarioService {
-  
+	
 	private final UsuarioDAO usuarioDAO = new UsuarioDAO();
-		
-	//private final String PEDRO = "pedro";
 	
     public void guardarUsuario(String nombre, String paterno, String materno) throws SQLException {
         if (nombre == null || nombre.trim().isEmpty()) {
@@ -23,16 +20,6 @@ public class UsuarioService {
     public void borrarUsuario(int usuarioId) throws Exception {
         usuarioDAO.borrarUsuario(usuarioId);
     }
-    
-    /*public ArrayList<Usuario> listarUsuarios(){
-		
-    	return usuarioDAO.listarUsuarios().stream()
-    	        .filter(usuario -> PEDRO.equalsIgnoreCase(usuario.getNombre())) // Filtrar por nombre
-    	        .collect(Collectors.toCollection(ArrayList::new)); // Convertir a ArrayList
-    	
-    }*/
-    
-    
     
     public ArrayList<Usuario> listarUsuarios(){
 		
