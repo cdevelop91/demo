@@ -1,11 +1,16 @@
 package demo.model;
 
 public class Usuario {
-	
+	private int id;
     private String nombre;
     private String paterno;
     private String materno;
-    
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -26,8 +31,7 @@ public class Usuario {
 	}
 	@Override
 	public String toString() {
-		return "Usuario [nombre=" + nombre + ", paterno=" + paterno + ", materno=" + materno + "]";
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", paterno=" + paterno + ", materno=" + materno + "]";
 	}
-
     
 }

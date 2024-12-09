@@ -11,7 +11,7 @@ public class UsuarioService {
   
 	private final UsuarioDAO usuarioDAO = new UsuarioDAO();
 		
-	private final String PEDRO = "pedro";
+	//private final String PEDRO = "pedro";
 	
     public void guardarUsuario(String nombre, String paterno, String materno) throws SQLException {
         if (nombre == null || nombre.trim().isEmpty()) {
@@ -20,22 +20,27 @@ public class UsuarioService {
         usuarioDAO.guardarUsuario(nombre, paterno, materno);
     }
     
-    public ArrayList<Usuario> listarUsuarios(){
+    public void borrarUsuario(int usuarioId) throws Exception {
+        usuarioDAO.borrarUsuario(usuarioId);
+    }
+    
+    /*public ArrayList<Usuario> listarUsuarios(){
 		
     	return usuarioDAO.listarUsuarios().stream()
     	        .filter(usuario -> PEDRO.equalsIgnoreCase(usuario.getNombre())) // Filtrar por nombre
     	        .collect(Collectors.toCollection(ArrayList::new)); // Convertir a ArrayList
     	
-    }
+    }*/
     
     
-    /*
+    
     public ArrayList<Usuario> listarUsuarios(){
 		
     	ArrayList<Usuario> results = usuarioDAO.listarUsuarios();
     	
     	ArrayList<Usuario> usuariosTransformados = results.stream()
     	        .map(usuario -> {
+    	        	usuario.setId(usuario.getId());
     	            usuario.setNombre(usuario.getNombre().toUpperCase());
     	            usuario.setPaterno(usuario.getPaterno().toUpperCase());
     	            usuario.setMaterno(usuario.getMaterno().toUpperCase());
@@ -45,5 +50,15 @@ public class UsuarioService {
     	    
     	    return usuariosTransformados;
     	
-    }*/
+    }
+    
+    public void editarUsuario(int id, String nombre, String paterno, String materno) throws SQLException {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío");
+        }
+        usuarioDAO.editarUsuario(id, nombre, paterno, materno);
+    }
+    
+
+    
 }

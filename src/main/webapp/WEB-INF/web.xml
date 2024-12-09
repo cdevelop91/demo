@@ -21,6 +21,8 @@
         <servlet-name>jsp</servlet-name>
         <url-pattern>*.jsp</url-pattern>
     </servlet-mapping>
+    
+    
 
     <!-- Definición del servlet para tu JSP específico -->
     <servlet>

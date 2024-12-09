@@ -39,7 +39,8 @@ public class UsuarioDAO {
 
             while (rs.next()) {
                 Usuario usuario = new Usuario();
-            
+                
+                usuario.setId(rs.getInt("id"));
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setPaterno(rs.getString("paterno"));
                 usuario.setMaterno(rs.getString("materno"));
@@ -53,5 +54,31 @@ public class UsuarioDAO {
         return results;
     }
     
+    public void borrarUsuario(int usuarioId) throws SQLException {
+        String sql = "DELETE FROM usuarios WHERE id = ?";
+        
+        try (Connection con = ConexionBD.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, usuarioId);
+            ps.executeUpdate();
+        }
+    }
+    
+    public void editarUsuario(int id, String nombre, String paterno, String materno) throws SQLException {
+        String sql = "UPDATE usuarios SET nombre = ?, paterno = ?, materno = ? WHERE id = ?";
+
+        try (Connection con = ConexionBD.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, nombre);
+            ps.setString(2, paterno);
+            ps.setString(3, materno);
+            ps.setInt(4, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al editar el usuario en la base de datos." + e);
+            throw new SQLException("Error al ejecutar la consulta en la base de datos", e);
+        }
+    }
     
 }
