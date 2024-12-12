@@ -3,6 +3,8 @@ package demo.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+
 import demo.model.Usuario;
 import demo.service.UsuarioService;
 import jakarta.servlet.ServletException;
@@ -97,26 +99,31 @@ public class UsuarioController extends HttpServlet {
 		
 		String action = request.getServletPath(); // Obtiene el path de la solicitud
 
-		switch (action) {
+	    switch (action) {
 
-		case "/listarUsuario":
-			System.out.println("listarUsuario");
-			try {
-				ArrayList<Usuario> usuarios = usuarioService.listarUsuarios();
+	    case "/listarUsuario":
+	        System.out.println("listarUsuario");
+	        try {
+	            ArrayList<Usuario> usuarios = usuarioService.listarUsuarios();
 
-				request.setAttribute("usuarios", usuarios);
-			} catch (Exception e) {
-				e.printStackTrace();
-				request.setAttribute("mensaje", "Ocurrió un error al listar los usuarios.");
-				request.setAttribute("tipoMensaje", "error");
-			}
+	            // Convertimos la lista de usuarios a JSON
+	            Gson gson = new Gson();
+	            String jsonUsuarios = gson.toJson(usuarios);
 
-			request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+	            // Establecemos el tipo de contenido a JSON
+	            response.setContentType("application/json");
+	            response.getWriter().write("{ \"usuarios\": " + jsonUsuarios + " }");
 
-			break;
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+	            response.getWriter().write("{ \"error\": \"Hubo un error al obtener los usuarios.\" }");
+	        }
 
-		default:
-			break;
+	        break;
+
+	    default:
+	        break;
 		}
 
 	}
